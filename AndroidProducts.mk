@@ -1,1 +1,1 @@
-PRODUCT_MAKEFILES := device/samsung/jflte/omni_jflte.mk
+PRODUCT_MAKEFILES := device/samsung/i9300/omni_i9300.mk

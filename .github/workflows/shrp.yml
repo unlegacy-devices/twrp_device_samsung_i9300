@@ -29,9 +29,9 @@ jobs:
           curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
           python3 ~/.bin/repo init --depth=1 -u https://github.com/unlegacy-devices/fox-7.1_manifest.git -b shrp-7.1
           python3 ~/.bin/repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
-          git clone --depth=1 --branch ${{ env.BRANCH }} --single-branch https://github.com/unlegacy-devices/twrp_device_${{ env.OEM }}_${{ env.DEVICE }}.git device/${{ env.OEM }}/${{ env.DEVICE }}
-          git clone --depth=1 --branch twrp-jf --single-branch https://github.com/JDCTeam/android_kernel_samsung_jf.git kernel/samsung/jf
-          git clone --depth 1 --branch android-7.1.2_r37 --single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8 /opt/toolchains/arm-eabi-4.8/
+          git clone --depth=1 --branch android-7.1.2_r38 --single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8 /opt/toolchains/arm-eabi-4.8
+          git clone --depth=1 --branch twrp-6.0 --single-branch https://github.com/unlegacy-devices/twrp_device_samsung_i9300.git device/samsung/i9300
+          git clone --depth=1 --branch cm-14.1 --single-branch https://github.com/unlegacy-devices/android_kernel_samsung_smdk4412/ kernel/samsung/smdk4412
       - name: Building SHRP
         run: |
           OLDPATH=$PATH
@@ -42,7 +42,7 @@ jobs:
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           export LC_ALL="C"
-          lunch omni_${{ env.DEVICE }}-eng
+          lunch omni_i9300-eng
           make -j$(nproc --all) recoveryimage
           export PATH=$OLDPATH
           export JAVA_HOME=$OLDJAVAHOME
@@ -50,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: shrp
-          path: /home/runner/SHRP/out/target/product/${{ env.DEVICE }}/recovery.*
+          path: /home/runner/SHRP/out/target/product/i9300/recovery.*

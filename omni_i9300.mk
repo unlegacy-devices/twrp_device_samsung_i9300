@@ -16,18 +16,12 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-# Inherit from jflte
-#$(call inherit-product, device/samsung/jflte/device.mk)
-
 # Inherit some common OmniROM stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
 
-# Inherit some JDCTeam stuff.
-#$(call inherit-product, vendor/jdc/config/common.mk)
-
-PRODUCT_NAME := omni_jflte
-PRODUCT_DEVICE := jflte
+PRODUCT_NAME := omni_i9300
+PRODUCT_DEVICE := i9300
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := Samsung
-PRODUCT_MODEL := GT-I9505
+PRODUCT_MODEL := GT-I9300
 

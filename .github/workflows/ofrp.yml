@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       OEM: samsung
-      DEVICE: jflte
+      DEVICE: i9300
       BRANCH: twrp-6.0
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +29,8 @@ jobs:
           python3 ~/.bin/repo init --depth=1 -u https://github.com/unlegacy-devices/fox-6.0_manifest.git -b fox_6.0
           python3 ~/.bin/repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
           git clone --depth=1 --branch android-7.1.2_r38 --single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8 /opt/toolchains/arm-eabi-4.8
-          git clone --depth=1 --branch ${{ env.BRANCH }} --single-branch https://github.com/unlegacy-devices/twrp_device_${{ env.OEM }}_${{ env.DEVICE }}.git device/${{ env.OEM }}/${{ env.DEVICE }}
-          git clone --depth=1 --branch twrp-jf --single-branch https://github.com/JDCTeam/android_kernel_samsung_jf.git kernel/samsung/jf
+          git clone --depth=1 --branch twrp-6.0 --single-branch https://github.com/unlegacy-devices/twrp_device_samsung_i9300.git device/samsung/i9300
+          git clone --depth=1 --branch cm-14.1 --single-branch https://github.com/unlegacy-devices/android_kernel_samsung_smdk4412/ kernel/samsung/smdk4412
       - name: Building OFRP
         run: |
           OLDPATH=$PATH
@@ -46,7 +46,7 @@ jobs:
           export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
           export OF_LEGACY_SHAR512=1
           export OF_DISABLE_KEYMASTER2=1
-          lunch omni_${{ env.DEVICE }}-eng
+          lunch omni_i9300-eng
           make -j$(nproc --all) recoveryimage
           export PATH=$OLDPATH
           export JAVA_HOME=$OLDJAVAHOME
@@ -54,4 +54,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ofrp
-          path: /home/runner/OFRP/out/target/product/${{ env.DEVICE }}/recovery.*
+          path: /home/runner/OFRP/out/target/product/i9300/recovery.*
