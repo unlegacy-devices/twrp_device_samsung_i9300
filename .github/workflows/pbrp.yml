@@ -40,7 +40,7 @@ jobs:
           export JAVA_HOME="$HOME/.jdk_7/java-se-7u75-ri"
           cd ~/PBRP
           rm -rf ~/PBRP/bootable/recovery
-          git clone https://github.com/PitchBlackRecoveryProject/android_bootable_recovery -b pbrp-go ~/PBRP/bootable/recovery
+          git clone https://github.com/PitchBlackRecoveryProject/android_bootable_recovery -b pb-go ~/PBRP/bootable/recovery
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           export LC_ALL="C"
