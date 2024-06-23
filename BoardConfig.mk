@@ -105,4 +105,5 @@ SHRP_EXPRESS := true
 SHRP_DARK := true
 
 # PitchBlack
+PB_GO := true
 PB_TORCH_PATH := /sys/devices/virtual/camera/flash/rear_flash
